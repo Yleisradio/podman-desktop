@@ -138,6 +138,8 @@ packages:
    multipass exec "$INSTANCE_NAME" -- systemctl --user enable --now podman.socket
    multipass exec "$INSTANCE_NAME" -- sudo loginctl enable-linger ubuntu
    multipass exec "$INSTANCE_NAME" -- sudo systemctl enable --now ssh.service
+
+  for mount in $MOUNTS; do multipass mount "$mount" "$INSTANCE_NAME"; done
 elif [ "$PRIMARY" != "$INSTANCE_NAME" ]; then
    echo "client.primary-name already set ($PRIMARY) for multipass"
    exit 1
@@ -151,8 +153,6 @@ if [ "$CONNECTIONS" -eq 0 ]; then
 else
   echo "podman already has $CONNECTIONS system connections defined"
 fi
-
-for mount in $MOUNTS; do multipass mount "$mount" "$INSTANCE_NAME"; done
 
 printf "%s\n" "$INSTANCE_NAME"
 
