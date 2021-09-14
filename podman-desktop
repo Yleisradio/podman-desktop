@@ -58,12 +58,18 @@ if [ ! -x "$(command -v podman-compose)" ]; then
 else
   echo "podman-compose found."
 fi
+<<<<<<< HEAD
 if [ "$GOOS" = "linux" ]; then
   echo "podman setup complete for Linux"
   exit 0
 fi
 
 validate "multipass"
+=======
+if [ "$GOOS" = "darwin" ]; then
+  validate "multipass"
+fi
+>>>>>>> 9602788 (Instructions on how to install missing components)
 
 while [ $# -gt 0 ]; do
   key="$1"
